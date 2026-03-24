@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
             <button className={styles.btnPrimary} onClick={() => setOpen(true)}>
               Зв'язатися
             </button>
-            <a className={styles.btnSecondary} href="#services">
+            <a className={styles.btnSecondary} href="#contact">
               Консультація
             </a>
           </div>
