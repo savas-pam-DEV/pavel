@@ -1,0 +1,48 @@
+.hero {
+  background: #eef7fb;
+  padding: 46px 16px;
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+}
+.inner {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 28px 18px;
+}
+.title {
+  font-size: 48px;
+  margin: 0;
+  color: #0b2233;
+  font-weight: 700;
+}
+.icon { margin-left: 8px; }
+.subtitle {
+  margin-top: 8px;
+  color: #586a73;
+  font-size: 32px;
+}
+.actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 56px;
+  justify-content: center;
+}
+.btnPrimary {
+  background: #0b78d1;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btnSecondary {
+  background: #ff9f1a;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}

@@ -1,0 +1,10 @@
+.main {
+  background: #eef7fb;
+  padding: 32px 16px;
+}
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
