@@ -3,10 +3,20 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ContactModal.module.css";
 import Footer from "./Footer";
 
+/**
+ * Вставьте сюда реальные данные:
+ * TELEGRAM: без @ (например coldair)
+ * PHONE: в формате +380XXXXXXXXX
+ * EMAIL: адрес почты
+ */
+const TELEGRAM_USERNAME = "ColdAirOd"; // <- замените на ваш username без @
+const PHONE_NUMBER = "+380995390595"; // <- замените на реальный номер с +380...
+const EMAIL_ADDRESS = "coldairod@gmail.com"; // <- замените на реальный email
+
 const CONTACTS = [
-  { id: "phone", label: "Номер телефону", value: "+380995390595" },
-  { id: "viber", label: "Viber / Telegram", value: "@ColdAirOd" },
-  { id: "email", label: "Email", value: "coldairod@gmail.com" },
+  { id: "phone", label: "Номер телефону", value: PHONE_NUMBER, type: "phone" },
+  { id: "viber", label: "Viber / Telegram", value: TELEGRAM_USERNAME, type: "telegram" },
+  { id: "email", label: "Email", value: EMAIL_ADDRESS, type: "email" },
 ];
 
 type Props = {
@@ -89,6 +99,25 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
     }
   };
 
+  const openTelegram = (username: string) => {
+    // Попробуем открыть tg protocol, иначе откроем web t.me
+    const tgLink = `tg://resolve?domain=${username}`;
+    const webLink = `https://t.me/${username}`;
+    // Попробуем открыть протокол — если не сработает, откроем web fallback
+    try {
+      window.location.href = tgLink;
+      // иногда протокол может не сработать — в таком случае можно fallback
+      setTimeout(() => window.open(webLink, "_blank", "noopener,noreferrer"), 700);
+    } catch {
+      window.open(webLink, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const callPhone = (phone: string) => {
+    // Используем tel: ссылку — откроется на мобильных устройствах
+    window.location.href = `tel:${phone}`;
+  };
+
   if (!open) return null;
 
   return (
@@ -113,24 +142,51 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
         </header>
 
         <div className={styles.body}>
-          <p className={styles.lead}>Тут ви можете швидко скопіювати контактні дані компанії.</p>
+          <p className={styles.lead}>Тут ви можете швидко зателефонувати або перейти в Telegram до нас.</p>
 
           <ul className={styles.list}>
             {CONTACTS.map((c) => (
               <li key={c.id} className={styles.item}>
                 <div className={styles.info}>
                   <div className={styles.label}>{c.label}</div>
-                  <div className={styles.value}>{c.value}</div>
+                  <div className={styles.value}>
+                    {c.type === "telegram" ? `@${c.value}` : c.value}
+                  </div>
                 </div>
+
                 <div className={styles.actions}>
-                  <button
-                    onClick={() => handleCopy(c.value, c.id)}
-                    className={styles.copyBtn}
-                    aria-label={`Скопіювати ${c.label}`}
-                  >
-                    Копіювати
-                  </button>
-                  {copied === c.id && <span className={styles.copied}>Скопійовано!</span>}
+                  {c.type === "telegram" && (
+                    <button
+                      onClick={() => openTelegram(c.value)}
+                      className={`${styles.actionBtn} ${styles.tgBtn}`}
+                      aria-label={`Перейти в Telegram ${c.value}`}
+                    >
+                      Перейти
+                    </button>
+                  )}
+
+                  {c.type === "phone" && (
+                    <button
+                      onClick={() => callPhone(c.value)}
+                      className={`${styles.actionBtn} ${styles.callBtn}`}
+                      aria-label={`Позвонити ${c.value}`}
+                    >
+                      Позвонити
+                    </button>
+                  )}
+
+                  {c.type === "email" && (
+                    <>
+                      <button
+                        onClick={() => handleCopy(c.value, c.id)}
+                        className={`${styles.actionBtn} ${styles.copyBtn}`}
+                        aria-label={`Скопіювати ${c.label}`}
+                      >
+                        Копіювати
+                      </button>
+                      {copied === c.id && <span className={styles.copied}>Скопійовано!</span>}
+                    </>
+                  )}
                 </div>
               </li>
             ))}
@@ -141,10 +197,9 @@ const ContactModal: React.FC<Props> = ({ open, onClose }) => {
           <div className={styles.footerPreview}>
             <h3>Міні-футер</h3>
             <p className={styles.footerText}>
-              Номер телефону: {CONTACTS[0].value} • Telegram / Viber: {CONTACTS[1].value} • Email:{" "}
-              {CONTACTS[2].value}
+              Номер телефону: {PHONE_NUMBER} • Telegram: @{TELEGRAM_USERNAME} • Email: {EMAIL_ADDRESS}
             </p>
-            {}
+
             <div className={styles.fullFooter}>
               <Footer />
             </div>

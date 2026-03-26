@@ -13,7 +13,9 @@ const Hero: React.FC = () => {
           <h1 className={styles.title}>
             Cold Air <span className={styles.icon}>❄️</span>
           </h1>
-          <p className={styles.subtitle}>Кондиціювання та вентиляція під ключ</p>
+          <p className={styles.subtitle}>
+            Кондиціювання та вентиляція під ключ — якісні рішення в Одесі
+          </p>
           <div className={styles.actions}>
             <button className={styles.btnPrimary} onClick={() => setOpen(true)}>
               Зв'язатися

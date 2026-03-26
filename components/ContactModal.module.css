@@ -1,3 +1,4 @@
+/* те ж саме, що раніше, додаю стили для нових кнопок */
 :root {
   --overlay-bg: rgba(6, 12, 18, 0.55);
   --card-bg: #ffffff;
@@ -99,15 +100,35 @@
   align-items: center;
   gap: 8px;
 }
-.copyBtn {
-  background: #0b78d1;
-  color: #fff;
+
+/* базовый стиль для кнопок действий */
+.actionBtn {
   border: none;
   padding: 8px 10px;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: 600;
+  cursor: pointer;
 }
+
+/* кнопка перейти в Telegram */
+.tgBtn {
+  background: #0088cc;
+  color: #fff;
+}
+
+/* кнопка звонка */
+.callBtn {
+  background: #0b78d1;
+  color: #fff;
+}
+
+/* кнопка копировать (email) */
+.copyBtn {
+  background: #0b78d1;
+  color: #fff;
+}
+
+/* подтверждение скопировано */
 .copied {
   font-size: 12px;
   color: #0b8d3f;
@@ -135,7 +156,6 @@
   font-size: 13px;
 }
 
-/* встроенный реальный футер (можно стилизовать или скрыть) */
 .fullFooter {
   margin-top: 12px;
 }
