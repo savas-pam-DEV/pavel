@@ -15,7 +15,7 @@ const EMAIL_ADDRESS = "coldairod@gmail.com"; // <- замените на реа�
 
 const CONTACTS = [
   { id: "phone", label: "Номер телефону", value: PHONE_NUMBER, type: "phone" },
-  { id: "viber", label: "Viber / Telegram", value: TELEGRAM_USERNAME, type: "telegram" },
+  { id: "viber", label: "Telegram", value: TELEGRAM_USERNAME, type: "telegram" },
   { id: "email", label: "Email", value: EMAIL_ADDRESS, type: "email" },
 ];
 
