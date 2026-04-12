@@ -23,6 +23,7 @@ export default function Page() {
       <RevealSection rootMargin="0px 0px -80px 0px" once={true}>
         <Footer />
       </RevealSection>
+      
     </>
   );
 }
